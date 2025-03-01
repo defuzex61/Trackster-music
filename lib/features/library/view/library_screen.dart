@@ -1,6 +1,8 @@
+import 'package:auto_route/annotations.dart';
 import 'package:flutter/material.dart';
-import 'package:trackster_music/HomePage.dart';
+import 'package:trackster_music/main.dart';
 
+@RoutePage()
 class LibraryScreen extends StatelessWidget {
   const LibraryScreen({super.key});
 
@@ -113,7 +115,7 @@ class LibraryScreen extends StatelessWidget {
       ),
     );
   }
-  
+
   Widget _buildSectionButton(IconData icon, String title, VoidCallback onTap) {
     return ListTile(
       leading: Icon(icon, color: Colors.white, size: 30),

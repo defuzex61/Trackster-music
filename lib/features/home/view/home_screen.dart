@@ -1,41 +1,17 @@
+import 'package:auto_route/annotations.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
-import 'package:trackster_music/LibraryScreen.dart';
-import 'package:trackster_music/SearchScreen.dart';
+import '../../../main.dart';
+import '../../library/library.dart';
+import '../../search/search.dart';
 
-void main() {
-  runApp(
-    ChangeNotifierProvider(
-      create: (_) => MusicProvider(),
-      child: const MyApp(),
-    ),
-  );
-}
 
-class MyApp extends StatelessWidget {
-  const MyApp({super.key});
-
-  @override
-  Widget build(BuildContext context) {
-    return MaterialApp(
-      title: 'Trackster',
-      theme: ThemeData(
-        primaryColor: Colors.white,
-        scaffoldBackgroundColor: Colors.black,
-        textTheme: const TextTheme(
-          bodyMedium: TextStyle(color: Colors.white), // Заменяет bodyText1
-          titleLarge: TextStyle(color: Colors.white, fontSize: 20), // Заменяет headline6
-        ),
-      ),
-      home: const HomeScreen(),
-    );
-  }
-}
+@RoutePage()
 class HomeScreen extends StatefulWidget {
-  const HomeScreen({super.key});
+const HomeScreen({super.key});
 
-  @override
-  State<HomeScreen> createState() => _HomeScreenState();
+@override
+State<HomeScreen> createState() => _HomeScreenState();
 }
 
 class _HomeScreenState extends State<HomeScreen> {
@@ -72,8 +48,8 @@ class _HomeScreenState extends State<HomeScreen> {
               ],
             ),
           ),
-          SearchScreen(),
-          LibraryScreen(),
+          const SearchScreen(),
+          const LibraryScreen(),
         ],
       ),
       bottomNavigationBar: BottomNavigationBar(
@@ -125,8 +101,8 @@ class _HomeScreenState extends State<HomeScreen> {
   Widget _buildPlaylistGrid() {
     return GridView.builder(
       shrinkWrap: true,
-      physics: NeverScrollableScrollPhysics(),
-      gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
+      physics: const NeverScrollableScrollPhysics(),
+      gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
         crossAxisCount: 2,
         childAspectRatio: 1.5,
       ),
@@ -144,15 +120,4 @@ class _HomeScreenState extends State<HomeScreen> {
       },
     );
   }
-}
-
-class MusicProvider with ChangeNotifier {
-  List<String> _tracks = ['Track 1', 'Track 2', 'Track 3'];
-  List<String> get tracks => _tracks;
-
-  void loadTracks() {
-    // Логика загрузки треков
-    notifyListeners();
-  }
-
 }

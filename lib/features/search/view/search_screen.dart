@@ -1,9 +1,13 @@
+import 'package:auto_route/annotations.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
-import 'HomePage.dart';
+import '../../../main.dart';
 
+@RoutePage()
 class SearchScreen extends StatelessWidget {
+  const SearchScreen({super.key});
+
   @override
   Widget build(BuildContext context) {
     final musicProvider = Provider.of<MusicProvider>(context);
@@ -14,7 +18,7 @@ class SearchScreen extends StatelessWidget {
           _buildSearchField(context),
           Expanded(
             child: ListView.builder(
-             // itemCount: musicProvider.searchResults.length,
+              // itemCount: musicProvider.searchResults.length,
               itemBuilder: (context, index) {
                 return ListTile(
                   leading: Icon(Icons.music_note, color: Colors.white),
@@ -44,7 +48,7 @@ class SearchScreen extends StatelessWidget {
       padding: const EdgeInsets.all(16.0),
       child: TextField(
         onChanged: (query) {
-         // musicProvider.searchTracks(query); // Обновляем результаты поиска
+          // musicProvider.searchTracks(query); // Обновляем результаты поиска
         },
         decoration: InputDecoration(
           hintText: 'Search tracks, artists, playlists...',
