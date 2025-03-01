@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
+import 'package:trackster_music/LibraryScreen.dart';
 import 'package:trackster_music/SearchScreen.dart';
 
 void main() {
@@ -41,6 +42,8 @@ class _HomeScreenState extends State<HomeScreen> {
 
   var _selectedPageIndex = 0;
 
+  final _pageController = PageController();
+
   @override
   Widget build(BuildContext context) {
     final musicProvider = Provider.of<MusicProvider>(context);
@@ -53,6 +56,8 @@ class _HomeScreenState extends State<HomeScreen> {
         elevation: 0,
       ),
       body: PageView(
+        physics: const NeverScrollableScrollPhysics(),
+        controller: _pageController,
         children: [
           SingleChildScrollView(
             child: Column(
@@ -68,9 +73,7 @@ class _HomeScreenState extends State<HomeScreen> {
             ),
           ),
           SearchScreen(),
-          Scaffold(),
-          Scaffold(),
-
+          LibraryScreen(),
         ],
       ),
       bottomNavigationBar: BottomNavigationBar(
@@ -90,6 +93,7 @@ class _HomeScreenState extends State<HomeScreen> {
   }
   void _openPage(int index){
     setState(()=>  _selectedPageIndex = index);
+    _pageController.animateToPage(index, duration: const Duration(milliseconds: 400), curve: Curves.easeInOut );
   }
   Widget _buildSectionHeader(String title) {
     return Padding(
